@@ -12,6 +12,7 @@ void main() {
 
     uv = vec2(uv.x, 1.0 - uv.y);
     uv = uv - 0.5;
+    uv.x *= resolution.x / resolution.y;
 
     float d = length(uv);
     // finalColor = vec4(uv.x, uv.y, 0.0, 1.0);

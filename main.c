@@ -1,8 +1,8 @@
 #include <raylib.h>
 
 int main(void) {
-    const int screenWidth = 500;
-    const int screenHeight = 500;
+    const int screenWidth = 800;
+    const int screenHeight = 600;
     InitWindow(screenWidth, screenHeight, "Shader");
     Shader shader = LoadShader(0, "main.fs");
 
