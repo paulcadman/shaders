@@ -7,6 +7,7 @@ int main(void) {
     Shader shader = LoadShader(0, "main.fs");
 
     int resolutionLoc = GetShaderLocation(shader, "resolution");
+    int timeLoc = GetShaderLocation(shader, "time");
 
     float resolution[2] = {(float) screenWidth, (float) screenHeight};
     SetShaderValue(shader, resolutionLoc, resolution, SHADER_UNIFORM_VEC2);
@@ -16,14 +17,18 @@ int main(void) {
     Texture2D texture = LoadTextureFromImage(imBlank);
     UnloadImage(imBlank);
 
+    float time = 0.0;
+
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
+        time += GetFrameTime();
+        SetShaderValue(shader, timeLoc, &time, SHADER_UNIFORM_FLOAT);
         BeginDrawing();
-        ClearBackground(BLACK);
-        BeginShaderMode(shader);
-        DrawTexture(texture, 0, 0, BLANK);
-        EndShaderMode();
-        DrawFPS(700, 15);
+            ClearBackground(BLACK);
+            BeginShaderMode(shader);
+              DrawTexture(texture, 0, 0, BLANK);
+            EndShaderMode();
+            DrawFPS(700, 15);
         EndDrawing();
     }
     CloseWindow();
